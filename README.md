@@ -35,11 +35,13 @@ arguments = parser.parse_args()
 logFile = arguments.logfile
 minHit = arguments.counter
 
+excludes = [ '127.0.0.1','::1']
+
 usage = "Error!! Usage: python3 hitcounter.py -l /Path/To/Log/File -c MinHit"
 
 if os.path.exists(logFile) and os.path.isfile(logFile) and minHit.isdigit():
 
-
+    print("{:16}   {}".format("IP Address","Hits"))
 
     ipCounter = {}
 
@@ -65,30 +67,33 @@ if os.path.exists(logFile) and os.path.isfile(logFile) and minHit.isdigit():
 
         for ip in ipCounter:
 
-            hit = ipCounter[ip]
+            if ip not in excludes:
 
-            if hit >= int(minHit):
+                hit = ipCounter[ip]
 
-                print("{:20} : {}".format(ip,hit))
+                if hit >= int(minHit):
+
+                    print("{:16} : {}".format(ip,hit))
         print()
         print("Total Line Processed : {}".format(lineCounter))
 else:
     print(usage)
+
 
 ```
 
 Usage Example
 ```sh
 root@SDTEAM:~/jewel/python# python3 hitcounter.py -l /root/jewel/python/python_log/access_log -c 5000
-184.75.214.66        : 8229
-209.126.120.29       : 7118
-64.237.55.3          : 7120
-178.255.152.2        : 5509
-96.47.225.18         : 7800
-109.123.101.103      : 9869
-76.164.194.74        : 5562
-76.72.167.154        : 5961
+IP Address         Hits
+184.75.214.66    : 8229
+209.126.120.29   : 7118
+64.237.55.3      : 7120
+178.255.152.2    : 5509
+96.47.225.18     : 7800
+109.123.101.103  : 9869
+76.164.194.74    : 5562
+82.103.139.165   : 8050
 
 Total Line Processed : 1160421
-
 ```
