@@ -1,10 +1,13 @@
 # access_log-hitcounter
+
 A complete python script for finding IP addresses higher than a given hit. Using switches. 
 
 hitcounter.py is the python script for finding the IP address from which we recieved higher hits than a given number. 
+
 ---
 This program takes arguments using the switches. the switches are -l/--log for specifying the logfile and -c/--count for specifying the minHit value(Default set to 2500). This also uses the logparser we created earlier [link](https://github.com/j4jewel/python-logparser)
 ---
+
 ### hitcounter.py
 
 ```sh
